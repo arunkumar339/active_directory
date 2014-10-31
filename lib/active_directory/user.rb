@@ -64,8 +64,8 @@ module ActiveDirectory
 		# or if no manager has been configured.
 		#
 		def manager
-			return nil if @entry.manager.nil?
-			User.find_by_distinguishedName(@entry.manager.to_s)
+			return @entry.manager
+			#User.find_by_distinguishedName(@entry.manager.to_s)
 		end
 
 		#
