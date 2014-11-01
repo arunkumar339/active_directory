@@ -63,17 +63,55 @@ module ActiveDirectory
 		# Returns nil if the schema does not include the manager attribute
 		# or if no manager has been configured.
 		#
-		def manager
-			#return nil if @entry.manager.nil?
-			#User.find_by_distinguishedname(@entry.manager.to_s)
+		def managers
+			return [] if @entry.manager.blank?
+			User.find(:all,:distinguishedname=>@entry.manager)
 		end
 
+		##custom method for getting immediate manager with assumption of first manager is the immediate one
+		def manager
+			return nil if @entry[:manager].blank?
+			User.find(:first,:distinguishedname=>@entry.manager.first)
+		end
+		
+		#Returns Job title
+		def title
+			return @entry[:title].join(" , ")
+		end
+
+		##Returns canonical name 
+		def cn
+			return @entry[:cn].join
+		end
+                ##Returns mail
+		def email
+			return @entry[:mail].join
+		end
+
+		#returns firstname
+		def first_name
+			return @entry[:givenname].join
+		end
+		
+		#returns lastname
+		def last_name
+			return @entry[:sn].join
+		end
+		#returns department			
+		def department
+			return @entry[:department].join
+		end	
+		#returns mobile
+		def mobile
+			return @entry[:mobile].join
+		end	
 		#
 		# Returns an array of Group objects that this User belongs to.
 		# Only the immediate parent groups are returned, so if the user
 		# Sally is in a group called Sales, and Sales is in a group
 		# called Marketting, this method would only return the Sales group.
 		#
+
 		def groups
 			@groups ||= Group.find(:all, :distinguishedname => @entry.memberOf)
 		end
@@ -82,6 +120,8 @@ module ActiveDirectory
 		# Returns an array of User objects that have this
 		# User as their manager.
 		#
+
+		
 		def direct_reports
 			return [] if @entry["directReports"].blank?
 			#@direct_reports ||= User.find(:all, @entry.directReports)
