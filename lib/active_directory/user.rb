@@ -83,7 +83,8 @@ module ActiveDirectory
 		def cn
 			return @entry[:cn].join
 		end
-                ##Returns mail
+		
+        #Returns mail
 		def email
 			return @entry[:mail].join
 		end
@@ -97,14 +98,28 @@ module ActiveDirectory
 		def last_name
 			return @entry[:sn].join
 		end
+		
 		#returns department			
 		def department
 			return @entry[:department].join
 		end	
+		
 		#returns mobile
 		def mobile
 			return @entry[:mobile].join
-		end	
+		end
+		
+		#returns description
+		def description
+			return @entry[:description].join
+		end
+		
+		#returns description
+		def office
+			return @entry[:physicalDeliveryOfficeName].join
+		end
+		
+		
 		#
 		# Returns an array of Group objects that this User belongs to.
 		# Only the immediate parent groups are returned, so if the user
