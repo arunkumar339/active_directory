@@ -16,14 +16,6 @@ Gem::Specification.new do |s|
     "README.md"
   ]
   s.files = [
-    ".idea/.name",
-    ".idea/.rakeTasks",
-    ".idea/active_directory.iml",
-    ".idea/encodings.xml",
-    ".idea/misc.xml",
-    ".idea/modules.xml",
-    ".idea/vcs.xml",
-    ".idea/workspace.xml",
     "README.md",
     "Rakefile",
     "VERSION",
